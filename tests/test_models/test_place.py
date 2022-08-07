@@ -1,35 +1,43 @@
 #!/usr/bin/python3
-""" Test Place """
+''' module for place tests '''
+from unittest import TestCase
+import json
+import re
+from uuid import UUID, uuid4
+from datetime import datetime
+from time import sleep
 
-import unittest
-import pep8
-from models import place
 from models.base_model import BaseModel
-
-class Test_Place(unittest.TestCase):
-    """ Tests Place """
-
-    def test_pep8(self):
-        """ Tests pep8 """
-        pep8style = pep8.StyleGuide(quite=True)
-        result = pep8style.check_files(["models/place.py"])
-        self.assertEqual(result.total_errors, 0, "Check pep8")
+from models.place import Place
 
 
-    def test_Place_dict(self):
-        """ Place_dict """
-        self.assertTrue('id' in self.place.__dict__)
-        self.assertTrue('created_at' in self.place.__dict__)
-        self.assertTrue('updated_at' in self.place.__dict__)
-        self.assertTrue('city_id' in self.place.__dict__)
-        self.assertTrue('user_id' in self.place.__dict__)
-        self.assertTrue('name' in self.place.__dict__)
-        self.assertTrue('__class__' in self.place.__dict__)
+class TestPlace(TestCase):
+    ''' tests Place class '''
+    def test_9(self):
+        ''' task 9 tests '''
+        self.assertTrue(issubclass(Place, BaseModel))
+        self.assertEqual(Place.city_id, '')
+        self.assertEqual(Place.user_id, '')
+        self.assertEqual(Place.name, '')
+        self.assertEqual(Place.description, '')
 
-    def test_save_Place(self):
-        """ Save_Place """
-        self.place.save()
-        self.assertNotEqual(self.place.created_at, self.place.updated_at)
+        self.assertTrue(type(Place.number_rooms) is int)
+        self.assertEqual(Place.number_rooms, 0)
 
-if __name__ == '__main__':
-    unittest.main()
+        self.assertTrue(type(Place.number_bathrooms) is int)
+        self.assertEqual(Place.number_bathrooms, 0)
+
+        self.assertTrue(type(Place.max_guest) is int)
+        self.assertEqual(Place.max_guest, 0)
+
+        self.assertTrue(type(Place.price_by_night) is int)
+        self.assertEqual(Place.price_by_night, 0)
+
+        self.assertTrue(type(Place.latitude) is float)
+        self.assertEqual(Place.latitude, 0.0)
+
+        self.assertTrue(type(Place.longitude) is float)
+        self.assertEqual(Place.longitude, 0.0)
+
+        self.assertTrue(type(Place.amenity_ids) is list)
+        self.assertEqual(Place.amenity_ids, []
